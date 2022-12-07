@@ -117,10 +117,12 @@
     }, 100);
 
     // 탭 메뉴 이벤트 - 스크롤
+    var autoSwiper = 'off';
     $(window).on("scroll", function() {
       //citrusSwiper.autoplay.start();
       $('#test').addClass('on');
-      if($('#test').hasClass("on")){
+      if($('#test').hasClass("on") && autoSwiper == 'off'){
+        autoSwiper = 'on';
         citrusSwiper.autoplay.start();
       }
     });
