@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carousel</title>
+</head>
+<style>
+  .wrap {
+    overflow: hidden;
+  }
+  .slide-container {
+    width: 300vw;
+    transition: all 1s;
+  }
+  .slide-box {
+    width: 100vw;
+    float: left;
+  }
+  .slide-box img {
+    width: 100%;
+  }
+</style>
+<body>
+  <div class="wrap">
+    <div class="slide-container">
+      <div class="slide-box">
+        <img src="../img/car1.png" alt="">
+      </div>
+      <div class="slide-box">
+        <img src="../img/car2.png" alt="">
+      </div>
+      <div class="slide-box">
+        <img src="../img/car3.png" alt="">
+      </div>
+    </div>
+  </div>
+  <button class="slide-prev">prev</button>
+  <button class="slide-1">1</button>
+  <button class="slide-2">2</button>
+  <button class="slide-3">3</button>
+  <button class="slide-next">next</button>
+
+  <script>
+    document.querySelector('.slide-1').addEventListener('click', function(){
+      document.querySelector('.slide-container').style.transform = 'translateX(0)';
+    })
+    document.querySelector('.slide-2').addEventListener('click', function(){
+      document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
+    })
+    document.querySelector('.slide-3').addEventListener('click', function(){
+      document.querySelector('.slide-container').style.transform = 'translateX(-200vw)';
+    })
+
+    var imgNum = 1;
+    var totalImg = document.getElementsByClassName('slide-box').length;
+    document.querySelector('.slide-next').addEventListener('click', function(){
+      if(imgNum < totalImg){
+        document.querySelector('.slide-container').style.transform = `translateX(-${imgNum}00vw)`;
+        imgNum++;
+      } else {
+        alert('넘길거 없으~~');
+      }
+    })
+
+    document.querySelector('.slide-prev').addEventListener('click', function(){
+      if(imgNum > 1){
+        var imgCount = imgNum - 2;
+        document.querySelector('.slide-container').style.transform = `translateX(-${imgCount}00vw)`;
+        imgNum--;
+      } else {
+        alert('넘길거 없으~~');
+      }
+    })
+  </script>
+</body>
+</html>
