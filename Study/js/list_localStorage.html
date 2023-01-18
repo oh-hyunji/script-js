@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>scroll</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+        <!-- 
+        <div class="col-sm-4">
+          <img src="https://via.placeholder.com/600" class="w-100">
+          <h5>Card title</h5>
+          <p>가격 : 70000</p>
+          <button class="buy">구매</button>
+        </div> 
+        -->
+    </div>
+  </div> 
+
+  <script>
+    var products = [
+      { id : 0, price : 70000, title : 'Blossom Dress' },
+      { id : 1, price : 50000, title : 'Springfield Shirt' },
+      { id : 2, price : 60000, title : 'Black Monastery' }
+    ];
+
+    function listHtml(item, index){
+      var html = 
+        `<div class="col-sm-4">
+          <img src="https://via.placeholder.com/600" class="w-100">
+          <h5>${item.title}</h5>
+          <p>가격 : ${item.price}</p>
+          <button class="buy">구매</button>
+        </div>`;
+      
+      document.querySelector('.row').innerHTML += html;
+    }
+
+    products.forEach((item, index) => {
+      listHtml(item, index);
+    });
+
+    //var cartArr = [];
+    document.querySelectorAll('.buy').forEach(function(el, index){
+      el.addEventListener('click', function(e){
+        // console.log('짜잔');
+        var text = e.target.parentNode.querySelector('h5').innerText;
+        //var text = e.target.previousElementSibling.previousElementSibling.innerText;
+
+        var cartArr = (JSON.parse(localStorage.getItem('cart'))) ? JSON.parse(localStorage.getItem('cart')) : [];
+        if(!cartArr.includes(text)){
+          cartArr.push(text);
+          localStorage.setItem('cart', JSON.stringify(cartArr));
+        }
+      })
+    });
+
+    var localCart = JSON.parse(localStorage.getItem('cart'));
+  </script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

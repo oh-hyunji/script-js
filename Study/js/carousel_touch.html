@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carousel</title>
+</head>
+<style>
+  .wrap {
+    overflow: hidden;
+  }
+  .slide-container {
+    width: 300vw;
+    transition: all 1s;
+  }
+  .slide-box {
+    width: 100vw;
+    float: left;
+  }
+  .slide-box img {
+    width: 100%;
+  }
+</style>
+<body>
+  <div class="wrap">
+    <div class="slide-container">
+      <div class="slide-box">
+        <img src="../img/car1.png" draggable="false">
+      </div>
+      <div class="slide-box">
+        <img src="../img/car2.png" draggable="false">
+      </div>
+      <div class="slide-box">
+        <img src="../img/car3.png" draggable="false">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var startX = 0;
+    var click = false;
+
+    // PC
+    document.getElementsByClassName('slide-box')[0].addEventListener('mousedown', function(e){
+      startX = e.clientX;
+      click = true;
+    });
+
+    document.getElementsByClassName('slide-box')[0].addEventListener('mousemove', function(e){
+      if(click){
+        document.querySelector('.slide-container').style.transform = `translateX(${e.clientX - startX}px)`;
+      }
+    });
+    document.getElementsByClassName('slide-box')[0].addEventListener('mouseup', function(e){
+      click = false;
+
+      if(e.clientX - startX < -100) {
+        document.querySelector('.slide-container').style.transition = 'all 0.5s';
+        document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
+      } else {
+        document.querySelector('.slide-container').style.transition = 'all 0.5s';
+        document.querySelector('.slide-container').style.transform = 'translateX(0)';
+      }
+
+      setTimeout(() => {
+        document.querySelector('.slide-container').style.transition = 'none';
+      }, 5000);
+    });
+
+    // 모바일
+    document.getElementsByClassName('slide-box')[0].addEventListener('touchstart', function(e){
+      startX = e.touches[0].clientX;
+      click = true;
+    });
+
+    document.getElementsByClassName('slide-box')[0].addEventListener('touchmove', function(e){
+      if(click){
+        document.querySelector('.slide-container').style.transform = `translateX(${e.touches[0].clientX - startX}px)`;
+      }
+    });
+    document.getElementsByClassName('slide-box')[0].addEventListener('touchend', function(e){
+      click = false;
+
+      if(e.changedTouches[0].clientX - startX < -100) {
+        document.querySelector('.slide-container').style.transition = 'all 0.5s';
+        document.querySelector('.slide-container').style.transform = 'translateX(-100vw)';
+      } else {
+        document.querySelector('.slide-container').style.transition = 'all 0.5s';
+        document.querySelector('.slide-container').style.transform = 'translateX(0)';
+      }
+
+      setTimeout(() => {
+        document.querySelector('.slide-container').style.transition = 'none';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>

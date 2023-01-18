@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .card-background {
+    height: 3000px;
+    margin-top: 800px;
+    margin-bottom: 1600px;
+  }
+
+  .card-box img {
+    display: block;
+    margin: auto;
+    max-width: 80%;
+  }
+  .card-box {
+    position: sticky;
+    top: 400px;
+    margin-top: 200px;
+    transform: scale(1);
+    transition : all 0.2s; 
+  }
+</style>
+<body>
+  <div class="card-background">
+    <div class="card-box">
+      <img src="../img/card1.png">
+    </div>
+    <div class="card-box">
+      <img src="../img/card2.png">
+    </div>
+    <div class="card-box">
+      <img src="../img/card3.png">
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', function(){
+      var height = window.scrollY;
+      // console.log(height);
+
+      var y = (-1/500) * height + (115/50);
+      document.getElementsByClassName('card-box')[0].style.opacity = y;
+
+      var z = ((-1/5000) * height + 565/500 > 1) ? 1 : (-1/5000) * height + 565/500;
+      document.getElementsByClassName('card-box')[0].style.transform = `scale( ${z} )`;
+    });
+  </script>
+</body>
+</html>
